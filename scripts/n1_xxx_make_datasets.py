@@ -16,7 +16,7 @@ def split_and_convert_to_coco(json_dir,
     # 클래스 이름과 ID 매핑
     category_map = {
         'Chip': 0,
-        'CSolder': 1,
+        'Solder': 1,
         '2sideIC': 2,
         'SOD': 3,
         'Circle': 4,
@@ -155,7 +155,7 @@ def split_and_convert_to_coco(json_dir,
     print("COCO format JSON files created with resized images and multi-class labels!")
 
 if __name__ == '__main__':
-    json_directory = '/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/2_raw_json'
+    json_directory = '/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/0_원본json'
     image_directory = '/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/1_2_800images'
     output_directory = '/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/datasets'
 

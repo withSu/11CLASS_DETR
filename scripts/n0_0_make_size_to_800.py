@@ -25,6 +25,6 @@ def resize_images(input_directory, output_directory, target_size=(800, 800)):
                 print(f"Error resizing {file}: {e}")
 
 # 실행
-input_directory = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/1_1_images"
+input_directory = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/0_원본이미지"
 output_directory = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/1_2_800images"
 resize_images(input_directory, output_directory)
