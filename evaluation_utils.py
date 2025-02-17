@@ -106,7 +106,7 @@ def evaluate_map(gt_json_path, pred_json_path, images_dir, output_dir, iou_thres
         matched_gt, matched_pred = match_boxes(gt_list, pred_list, iou_threshold)
         
         vis_image = draw_boxes(image, gt_list, pred_list, matched_gt, matched_pred)
-        cv2.imwrite(os.path.join(output_dir, file_name), vis_image)
+        #cv2.imwrite(os.path.join(output_dir, file_name), vis_image)
         
         missed_count = len(gt_list) - len(matched_gt)
         total_gt_boxes += len(gt_list)

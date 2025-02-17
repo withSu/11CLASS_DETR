@@ -142,16 +142,37 @@ def main(args):
         )
         lr_scheduler.step()
 
-        # validation - 검증
+        # validation - 검증 수행
         base_ds = utils.get_coco_api_from_dataset(dataset_val)
         test_stats, coco_evaluator = evaluate(
-            model, criterion, postprocessors, data_loader_val, 
-            base_ds, device, args.output_dir
+            model, criterion, postprocessors, data_loader_val, base_ds, device, args.output_dir
         )
         
+        # 에포크 종료 후 평가 결과 출력 및 시각화를 위해 evaluate_map 함수 호출
+        if (epoch + 1) % 5 == 0:
+            gt_json = "./datasets/annotations/val.json"  # 검증 데이터의 GT JSON 파일 경로로 수정
+            pred_json = os.path.join(args.output_dir, "predictions.json")  # evaluate 함수에서 생성한 predictions.json 경로이다.
+            images_dir = "./datasets/val_images"  # 검증 이미지 폴더 경로로 수정
+            output_dir = os.path.join(args.output_dir, f"visualization_epoch_{epoch:03}")
+            evaluate_map(gt_json, pred_json, images_dir, output_dir, iou_threshold=0.75)
         
-        
-        
+        # 에포크별 모델 체크포인트 저장 등 추가 작업 수행
+        if args.output_dir and (epoch + 1) % 50 == 0:
+            checkpoint_path = Path(args.output_dir) / f"checkpoint_{epoch:03}.pth"
+            utils.save_on_master({
+                'model': model_without_ddp.state_dict(),
+                'optimizer': optimizer.state_dict(),
+                'lr_scheduler': lr_scheduler.state_dict(),
+                'epoch': epoch,
+                'args': args,
+            }, checkpoint_path)
+
+            log_path = os.path.join(args.output_dir, "epoch_log.txt")
+            with open(log_path, "a") as f:
+                f.write(f"Epoch {epoch} - Train Stats: {train_stats}\n")
+                f.write(f"Epoch {epoch} - Test  Stats: {test_stats}\n\n")
+            
+            
         
         
 
