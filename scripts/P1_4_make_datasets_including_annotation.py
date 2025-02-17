@@ -113,8 +113,8 @@ def convert_labelme_to_coco(source_json_dir, source_image_dir, output_image_dir,
 
 if __name__ == '__main__':
     # 학습용 (증강된 데이터는 train에만 넣음)
-    train_source_json = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train"
-    train_source_image = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train"
+    train_source_json = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train_enhanced"
+    train_source_image = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train_enhanced"
     output_train_images = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/datasets/train_images"
     output_train_annotation = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/datasets/annotations/train.json"
     

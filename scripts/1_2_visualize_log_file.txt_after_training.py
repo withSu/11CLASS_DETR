@@ -52,7 +52,7 @@ def plot_losses(epochs, train_losses, test_losses):
 
 
 # 로그 파일 경로 설정
-log_file = "/home/a/A_2024_selfcode/PCB_proj_DETR/5_output(500, batch=2)(eos-coef 0.2)_2.2/output_augmented_eos0.1/epoch_log.txt"
+log_file = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/output_class800detr/epoch_log.txt"
 
 # 로그 파일 파싱
 epochs, train_losses, test_losses = parse_epoch_log(log_file)

@@ -20,6 +20,7 @@ import os
 
 from visualize_utils import inference_and_visualize # 시각화 함수 임포트
 from util.misc import get_coco_api_from_dataset
+from evaluation_utils import evaluate_map
 
 
 
@@ -105,15 +106,22 @@ def main(args):
 
     # 3) eval 모드만 실행할 경우 - 평가모드 실행
     if args.eval:
-        # 평가 (mAP 등 계산)
-        base_ds = get_coco_api_from_dataset(dataset_val)  # 이 라인 추가
+    # COCO API를 활용한 평가 수행
+        base_ds = get_coco_api_from_dataset(dataset_val)
         test_stats, coco_evaluator = evaluate(model, criterion, postprocessors, data_loader_val, base_ds, device, args.output_dir)
         
-        # 추론 및 시각화 실행
+        # 추론 및 시각화 수행
         print("Starting visualization after evaluation...")
         inference_and_visualize(model, postprocessors, data_loader_val, device, args.output_dir)
+        
+        # evaluate_map 함수를 호출하여 추가 평가 및 시각화를 진행한다.
+        gt_json = "./datasets/annotations/val.json"  # 실제 GT JSON 파일 경로로 수정한다.
+        pred_json = os.path.join(args.output_dir, "predictions.json")  # engine.py에서 생성된 predictions.json 경로이다.
+        images_dir = "./datasets/val_images"  # 실제 이미지 디렉토리 경로로 수정한다.
+        output_dir = "./datasets/after_inference"  # 평가 결과 이미지가 저장될 출력 디렉토리 경로로 수정한다.
+        evaluate_map(gt_json, pred_json, images_dir, output_dir, iou_threshold=0.75)
+
         return
-    
     
     
     

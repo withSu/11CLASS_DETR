@@ -8,7 +8,7 @@ from glob import glob
 print("증강된 결과의 바운딩 박스 시각화 코드를 실행한다.")
 
 # 증강된 이미지와 JSON 파일이 저장된 디렉토리
-augmented_dir = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train"
+augmented_dir = "/home/a/A_2024_selfcode/CLASS-PCB_proj_DETR/raw_datasets/3_1_aug_train_enhanced"
 
 # augmented_dir 내의 증강된 이미지 파일(.jpg) 목록을 가져온다.
 aug_image_files = glob(os.path.join(augmented_dir, "aug_*.jpg"))
